@@ -1,2 +1,4 @@
 # two-words-quotient-and-reminder
-Gets input, prints out the result
+#Assembly 8086
+Gets input of two words, prints out the result
+of division - whole part and reminder
