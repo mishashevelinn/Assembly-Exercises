@@ -22,7 +22,7 @@ start:
 mov     ax,@DATA
 mov     ds,ax
 
-
+;-----------------------------------------MAIN-----------------------------------------------------------------
 main proc
 push offset arr1 ;sending parameters to procedure by pushing to stack
 push num1
@@ -43,8 +43,9 @@ endp main
 
 
 jmp fin
-;-----------------------input---------------------------------------------------------------------------
-;procidure witch responsible to ger users input and print Carrege return--------------
+
+
+;----------------------------------------FINDS---GIVEN---NUMBER---IN---ARRAY---------------------------------------------------
 find		proc
 		push bp			;standart procedure actions: setting base pointer to the last element, pushed to the stack
 		mov bp, sp
@@ -52,8 +53,7 @@ find		proc
 
 		push bx			;pushing all the registers in for further proper usage
 		push si
-		push cx
-		push ax 
+		push cx 
 		push dx
 
 		mov cx, [bp+2]		;len1 strored in ax
@@ -80,29 +80,26 @@ find		proc
 		mov ah, 09
 		int 21H
 		
-		mov ax, si					
-		xor dx, dx
-		div ten
-		add dx, '0'
-		mov ah, 02
+		mov ax, si					;as required, mooving the address to ax					
+		div ten						;split HEX number into bytes -mbs - quatient--lsb - reminder
+		add dx, '0'					;shifting the result to 30H to get the ASCII of number
+		mov ah, 02				;print the reminder 
 		int 21H
-	
-		
+		mov si, ax					;in case ax was nullified by division command
 		
 		quit:
-		pop dx
-		pop ax
+		pop dx						;pop every registers, pushed
 		pop cx
 		pop si
 		pop bx
 		pop bp
-		ret 6
+		
+		ret 6							;since we work with words - size of 3 variables, pushed in main is six
+
 		
 endp find
-;--------------------------------string-to-number-convertion-------------------------------
 
 	
-;----------------------------------------end of program-----------------------
 fin:
 ;----------------end---code------------------------------------------
 	mov     ah,4CH
