@@ -88,7 +88,7 @@ find		proc
 		mov si, ax					;in case ax was nullified by division command
 		
 		quit:
-		pop dx						;pop every registers, pushed
+		pop dx						;pop every register, pushed
 		pop cx
 		pop si
 		pop bx
