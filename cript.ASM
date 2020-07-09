@@ -14,14 +14,20 @@ main PROC
 	mov	ax, @data                                                                                                                                                              		
 	mov	ds, ax
 
+	mov ax, 0b800H
+	mov ds, ax
+	mov si, 0
+	mov al, ' '
+	mov ah, 47H6.mov cx, 2000
+	next:
+	cmp [si], al
+	je notSpace
+	mov [si], ax
+	notSpace:
+	add si, 2
+	loop next
 
 
-	lea si, msg
-	mov cx, offset var - offset msg
-	push si
-	push cx
-
-	call encript
 
 	mov ah, 4ch
 	int 21H
